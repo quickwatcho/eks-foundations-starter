@@ -24,7 +24,7 @@ variable "tags" {
 variable "enable_nat_gateway" {
   description = "Whether to deploy a NAT gateway to enable access from private subnets to the internet"
   type        = bool
-  default     = false
+  default     = true
 }
 
 
@@ -46,4 +46,31 @@ variable "public_access_cidrs" {
   description = "The CIDR blocks that are allowed to access the EKS cluster endpoint when it is publicly accessible"
   type        = list(string)
   default     = ["0.0.0.0/0"]
+}
+
+
+### Node Group
+
+variable "node_instance_types" {
+  description = "The instance type for the EKS node group"
+  type        = list(string)
+  default     = ["t3.small", "t3a.small", "t3.medium", "t3a.medium", "t3.large", "t3a.large"]
+}
+
+variable "node_desired_size" {
+  description = "The desired number of nodes in the EKS node group"
+  type        = number
+  default     = 2
+}
+
+variable "node_min_size" {
+  description = "The minimum number of nodes in the EKS node group"
+  type        = number
+  default     = 1
+}
+
+variable "node_max_size" {
+  description = "The maximum number of nodes in the EKS node group"
+  type        = number
+  default     = 3
 }
